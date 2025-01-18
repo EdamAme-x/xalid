@@ -4,11 +4,11 @@ import { createError, createValidator } from "../utils/create";
 export const array = <T extends Validator<any> | Validator<any>[]>(
   itemValidator: T,
 ): Validator<Array<T extends Validator<infer U> ? U : never>> => {
-  const validator = createValidator<Array<any>>((input: unknown) => {
+  const validator = createValidator<Array<any>>((input: unknown, path: (string | number)[] = []) => {
     if (!Array.isArray(input)) {
       return {
         ok: false,
-        error: [createError("input is not an array")],
+        error: [createError("input is not an array", path)],
       };
     }
 
@@ -27,7 +27,7 @@ export const array = <T extends Validator<any> | Validator<any>[]>(
       if (!validationResult.ok) {
         errors.push(
           ...validationResult.error.map((e) =>
-            createError(`error in item at index ${i}: ${e.message}`)
+            createError(`error in item at index ${i}: ${e.message}`, path.concat(i)),
           ),
         );
       } else {

@@ -13,6 +13,7 @@ export type ValidationResult<TInput> = {
 
 export type InternalValidator<TInput> = (
   input: unknown,
+  path?: (string | number)[]
 ) => ValidationResult<TInput>;
 
 export type Validator<TInput> = InternalValidator<TInput> & {};

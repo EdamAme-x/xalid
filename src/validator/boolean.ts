@@ -4,11 +4,11 @@ import { createError, createValidator } from "../utils/create";
 export const boolean = <TExplicit extends boolean>(
   options?: TExplicit,
 ): Validator<TExplicit extends true ? true : boolean> => {
-  const validator = createValidator<boolean>((input: unknown) => {
+  const validator = createValidator<boolean>((input: unknown, path: (string | number)[] = []) => {
     if (typeof input !== "boolean") {
       return {
         ok: false,
-        error: [createError("input is not boolean")],
+        error: [createError("input is not boolean", path)],
       };
     }
 
@@ -16,7 +16,7 @@ export const boolean = <TExplicit extends boolean>(
       if (input !== options) {
         return {
           ok: false,
-          error: [createError(`input is not ${options}`)],
+          error: [createError(`input is not ${options}`, path)],
         };
       }
     }

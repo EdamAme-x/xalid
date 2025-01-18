@@ -52,7 +52,7 @@ const xalidSchema = x.object({
   name: x.string(),
   age: x.number(),
   email: x.string({
-    regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
   }),
   data: x.object({
     createdAt: x.number(),

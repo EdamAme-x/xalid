@@ -13,19 +13,19 @@ export const nullish = <TStrict extends boolean>(
     ...options,
   };
 
-  const validator = createValidator<null | undefined>((input: unknown) => {
+  const validator = createValidator<null | undefined>((input: unknown, path: (string | number)[] = []) => {
     if (strict) {
       if (input !== null) {
         return {
           ok: false,
-          error: [createError("input is not null")],
+          error: [createError("input is not null", path)],
         };
       }
     } else {
       if (input !== null && input !== undefined) {
         return {
           ok: false,
-          error: [createError("input is not nullish")],
+          error: [createError("input is not nullish", path)],
         };
       }
     }

@@ -4,7 +4,7 @@ import { createError, createValidator } from "../utils/create";
 export const any = <TOutput>(
   options?: (input: unknown) => boolean | ValidationResult<TOutput>,
 ): Validator<TOutput> => {
-  const validator = createValidator<unknown>((input: unknown) => {
+  const validator = createValidator<unknown>((input: unknown, path: (string | number)[] = []) => {
     if (options) {
       const result = options(input);
 
@@ -12,7 +12,7 @@ export const any = <TOutput>(
         if (!result) {
           return {
             ok: false,
-            error: [createError("input is not valid")],
+            error: [createError("input is not valid", path)],
           };
         }
       } else {

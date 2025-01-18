@@ -14,7 +14,7 @@ export const createValidator = <TInput>(
 
 export const createError = (
   message: string,
-  path?: (string | number)[],
+  path: (string | number)[],
 ): ValidationError => ({
   message,
   path,

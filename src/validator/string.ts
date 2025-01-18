@@ -19,11 +19,11 @@ export const string = <TExplicit extends string>(
     regex,
   } = isExplictString ? {} : options;
 
-  const validator = createValidator<string>((input: unknown) => {
+  const validator = createValidator<string>((input: unknown, path: (string | number)[] = []) => {
     if (typeof input !== "string") {
       return {
         ok: false,
-        error: [createError("input is not string")],
+        error: [createError("input is not string", path)],
       };
     }
 
@@ -32,27 +32,27 @@ export const string = <TExplicit extends string>(
         if (input !== options) {
           return {
             ok: false,
-            error: [createError(`input is not '${options}'`)],
+            error: [createError(`input is not '${options}'`, path)],
           };
         }
       } else {
         if (length && input.length !== length) {
           return {
             ok: false,
-            error: [createError(`input length is not ${length}`)],
+            error: [createError(`input length is not ${length}`, path)],
           };
         } else {
           if (min && input.length < min) {
             return {
               ok: false,
-              error: [createError(`input length is less than ${min}`)],
+              error: [createError(`input length is less than ${min}`, path)],
             };
           }
 
           if (max && input.length > max) {
             return {
               ok: false,
-              error: [createError(`input length is greater than ${max}`)],
+              error: [createError(`input length is greater than ${max}`, path)],
             };
           }
         }
@@ -61,7 +61,7 @@ export const string = <TExplicit extends string>(
           return {
             ok: false,
             error: [
-              createError(`input does not match regex ${regex.toString()}`),
+              createError(`input does not match regex ${regex.toString()}`, path),
             ],
           };
         }

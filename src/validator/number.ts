@@ -17,11 +17,11 @@ export const number = <TExplicit extends number>(
     integer,
   } = isExplictNumber ? {} : options;
 
-  const validator = createValidator<number>((input: unknown) => {
+  const validator = createValidator<number>((input: unknown, path: (string | number)[] = []) => {
     if (typeof input !== "number") {
       return {
         ok: false,
-        error: [createError("input is not number")],
+        error: [createError("input is not number", path)],
       };
     }
 
@@ -30,28 +30,28 @@ export const number = <TExplicit extends number>(
         if (input !== options) {
           return {
             ok: false,
-            error: [createError(`input is not ${options}`)],
+            error: [createError(`input is not ${options}`, path)],
           };
         }
       } else {
         if (min && input < min) {
           return {
             ok: false,
-            error: [createError(`input is less than ${min}`)],
+            error: [createError(`input is less than ${min}`, path)],
           };
         }
 
         if (max && input > max) {
           return {
             ok: false,
-            error: [createError(`input is greater than ${max}`)],
+            error: [createError(`input is greater than ${max}`, path)],
           };
         }
 
         if (integer && !Number.isInteger(input)) {
           return {
             ok: false,
-            error: [createError("input is not integer")],
+            error: [createError("input is not integer", path)],
           };
         }
       }

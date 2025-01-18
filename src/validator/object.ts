@@ -8,11 +8,11 @@ export const object = <T extends Record<string, Validator<any>>>(
 > => {
   const properties = options;
 
-  const validator = createValidator<Record<string, any>>((input: unknown) => {
+  const validator = createValidator<Record<string, any>>((input: unknown, path: (string | number)[] = []) => {
     if (typeof input !== "object" || input === null) {
       return {
         ok: false,
-        error: [createError("input is not object")],
+        error: [createError("input is not object", path)],
       };
     }
 
@@ -28,7 +28,7 @@ export const object = <T extends Record<string, Validator<any>>>(
       if (!validationResult.ok) {
         errors.push(
           ...validationResult.error.map((e) =>
-            createError(`error in property '${key}': ${e.message}`)
+            createError(`error in property '${key}': ${e.message}`, path.concat(key)),
           ),
         );
       } else {
