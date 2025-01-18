@@ -5,7 +5,9 @@ interface StringOptions<TStrict extends boolean> {
   strict?: TStrict;
 }
 
-export const nullish = <TStrict extends boolean>(options?: StringOptions<TStrict>): Validator<TStrict extends true ? null : null | undefined> => {
+export const nullish = <TStrict extends boolean>(
+  options: StringOptions<TStrict> = {},
+): Validator<TStrict extends true ? null : null | undefined> => {
   const { strict } = {
     strict: false,
     ...options,
@@ -19,7 +21,7 @@ export const nullish = <TStrict extends boolean>(options?: StringOptions<TStrict
           error: [createError("input is not null")],
         };
       }
-    }else {
+    } else {
       if (input !== null && input !== undefined) {
         return {
           ok: false,

@@ -9,7 +9,7 @@ interface StringOptions {
 }
 
 export const string = <TExplicit extends string>(
-  options: TExplicit | StringOptions,
+  options: TExplicit | StringOptions = {},
 ): Validator<TExplicit> => {
   const isExplictString = typeof options === "string";
   const {

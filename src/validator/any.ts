@@ -5,20 +5,19 @@ export const any = <TOutput>(
   options?: (input: unknown) => boolean | ValidationResult<TOutput>,
 ): Validator<TOutput> => {
   const validator = createValidator<unknown>((input: unknown) => {
-
     if (options) {
-        const result = options(input);
+      const result = options(input);
 
-        if (typeof result === "boolean") {
-          if (!result) {
-            return {
-              ok: false,
-              error: [createError("input is not valid")],
-            };
-          }
-        } else {
-          return result;
+      if (typeof result === "boolean") {
+        if (!result) {
+          return {
+            ok: false,
+            error: [createError("input is not valid")],
+          };
         }
+      } else {
+        return result;
+      }
     }
 
     return {

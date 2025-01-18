@@ -2,13 +2,13 @@ import type { Validator } from "../types/validator";
 import { createError, createValidator } from "../utils/create";
 
 interface NumberOptions {
-    min?: number;
-    max?: number;
-    integer?: boolean;
+  min?: number;
+  max?: number;
+  integer?: boolean;
 }
 
 export const number = <TExplicit extends number>(
-  options: TExplicit | NumberOptions,
+  options: TExplicit | NumberOptions = {},
 ): Validator<TExplicit> => {
   const isExplictNumber = typeof options === "number";
   const {
