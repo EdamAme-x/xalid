@@ -2,9 +2,13 @@
  * x.object({
  *   name: x.string(),
  *   age: x.number(),
- *   email: x.string().email(),
- *   bioUrl: x.string().url(),
- *   tags: x.array(x.string())
+ *   email: x.string(),
+ *   bioUrl: x.string(),
+ *   tags: x.array(x.string()),
+ *   any: x.any(),
+ *   transform: x.object({
+ *     name: x.string()
+ *   })
  * })
  */
 

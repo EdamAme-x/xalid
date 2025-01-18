@@ -1,5 +1,5 @@
-import type { InternalValidator, Validator } from "../types/validator";
-import { createError, createValidator } from "./create";
+import type { Validator } from "../types/validator";
+import { createError, createValidator } from "../utils/create";
 
 interface StringOptions {
   min?: number;
@@ -10,7 +10,7 @@ interface StringOptions {
 
 export const string = (
   options: string | StringOptions,
-): Validator<"string"> => {
+): Validator<string> => {
   const isExplictString = typeof options === "string";
   const {
     min,
@@ -72,7 +72,7 @@ export const string = (
       ok: true,
       value: input,
     };
-  }) as Validator<"string">;
+  }) as Validator<string>;
 
   return validator;
 };
