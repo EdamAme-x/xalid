@@ -19,7 +19,8 @@ export const object = <T extends Record<string, Validator<any>>>(
     const result: Record<string, any> = {};
     const errors: ValidationError[] = [];
 
-    for (const key in properties) {
+    for (let i = 0, keys = Object.keys(properties), len = keys.length; i < len; i++) {
+      const key = keys[i];
       const propertyValidator = properties[key];
       const value = (input as Record<string, any>)[key];
 
