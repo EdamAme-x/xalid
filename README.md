@@ -1,4 +1,11 @@
-<center>
-  <h1>Xalid</h1>
-  <p>TypeScript-first schema validation for JSON</p>
-</center>
+<h1>
+  <center>
+    Xalid
+  </center>
+</h1>
+
+<p>
+  <center>
+    TypeScript-first schema validation for JSON
+  </center>  
+</p>
