@@ -3,3 +3,5 @@
   <h1>Xalid</h1>
   <p>TypeScript-first minimal schema validation for JSON</p>
 </div>
+
+ToDo: Faster, Record, Union, More, Standard
