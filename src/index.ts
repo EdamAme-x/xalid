@@ -1,16 +1,17 @@
-/**
- * x.object({
- *   name: x.string(),
- *   age: x.number(),
- *   email: x.string(),
- *   bioUrl: x.string(),
- *   tags: x.array(x.string()),
- *   any: x.any(),
- *   transform: x.object({
- *     name: x.string()
- *   })
- * })
- */
+import { any } from "./validator/any";
+import { array } from "./validator/array";
+import { boolean } from "./validator/boolean";
+import { nullish } from "./validator/nullish";
+import { number } from "./validator/number";
+import { object } from "./validator/object";
+import { string } from "./validator/string";
 
-export class x {
-}
+export const x = {
+  any,
+  array,
+  boolean,
+  nullish,
+  number,
+  object,
+  string,
+};
