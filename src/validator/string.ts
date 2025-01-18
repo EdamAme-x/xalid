@@ -8,9 +8,9 @@ interface StringOptions {
   regex?: RegExp;
 }
 
-export const string = (
-  options: string | StringOptions,
-): Validator<string> => {
+export const string = <TExplicit extends string>(
+  options: TExplicit | StringOptions,
+): Validator<TExplicit> => {
   const isExplictString = typeof options === "string";
   const {
     min,
@@ -72,7 +72,7 @@ export const string = (
       ok: true,
       value: input,
     };
-  }) as Validator<string>;
+  }) as Validator<TExplicit>;
 
   return validator;
 };
