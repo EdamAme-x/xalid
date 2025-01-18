@@ -1,4 +1,4 @@
-import type { Validator } from "../types/validator";
+import type { ValidationError, Validator } from "../types/validator";
 import { createError, createValidator } from "../utils/create";
 
 export const object = <T extends Record<string, Validator<any>>>(
@@ -12,12 +12,12 @@ export const object = <T extends Record<string, Validator<any>>>(
     if (typeof input !== "object" || input === null) {
       return {
         ok: false,
-        error: [createError("input is not an object")],
+        error: [createError("input is not object")],
       };
     }
 
-    const result: any = {};
-    const errors: any[] = [];
+    const result: Record<string, any> = {};
+    const errors: ValidationError[] = [];
 
     for (const key in properties) {
       const propertyValidator = properties[key];
