@@ -69,4 +69,27 @@ for (const key in valid) {
   });
 }
 
+group("primitive all", () => {
+  bench("zod", () => {
+    for (const key in zodSchema) {
+      // @ts-expect-error
+      zodSchema[key].safeParse(valid[key]);
+    }
+  });
+
+  bench("valibot", () => {
+    for (const key in valibotSchema) {
+      // @ts-expect-error
+      v.safeParse(valibotSchema[key], valid[key]);
+    }
+  });
+
+  bench("xalid", () => {
+    for (const key in xalidSchema) {
+      // @ts-expect-error
+      xalidSchema[key](valid[key]);
+    }
+  });
+});
+
 await run();
